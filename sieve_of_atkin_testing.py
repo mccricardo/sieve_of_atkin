@@ -36,23 +36,35 @@ class SieveOfAtkinTests(unittest.TestCase):
 	
 	def testFlip(self):
 		soa = SieveOfAtkin(10)
-		soa.flip(2)
-		flp = soa.primes[2]			
-		self.assertEqual(flp, 0)		
 		
-		soa.flip(2)
-		flp = soa.primes[2]			
-		self.assertEqual(flp, 1)		
-	
+		soa.flip(2)		
+		self.assertEqual(soa.primes[2], 0)		
+		
+		soa.flip(2)		
+		self.assertEqual(soa.primes[2], 1)		
+
+
+	def testInvalidate(self):
+		soa = SieveOfAtkin(10)
+		
+		soa.invalidate(2)
+		self.assertEqual(soa.primes[2], 0)		
+		
+		soa.invalidate(2)
+		self.assertEqual(soa.primes[2], 0)		
+
+
 	def testPrimesLowerThan10(self):
 		soa = SieveOfAtkin(10)
 		primesLowerThan10 = [x for x in self.primes if  x<10]
 		self.assertEqual(soa.getPrimes(), primesLowerThan10)
 
+
 	def testPrimesLowerThan100(self):
 		soa = SieveOfAtkin(100)
 		primesLowerThan100 = [x for x in self.primes if  x<100]
 		self.assertEqual(soa.getPrimes(), primesLowerThan100)
+
 
 	def testPrimesLowerThan1000(self):
 		soa = SieveOfAtkin(100)
