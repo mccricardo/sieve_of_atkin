@@ -18,7 +18,7 @@ class SieveOfAtkin:
 		try:
 			if self.primes[prime] == 1: self.primes[prime] = 0
 		except KeyError:
-			pass
+			pass			
 
 
 	def isPrime(self, prime):
@@ -26,7 +26,7 @@ class SieveOfAtkin:
 			if self.primes[prime] == 1: return True
 			else: return False
 		except KeyError:
-			pass		
+			return False
 
 
 	def getPrimes(self):	
@@ -53,7 +53,7 @@ class SieveOfAtkin:
 					self.flip(n)				
 
 
-		for i in range(5, testingLimit):
+		for i in range(5, testingLimit):			
 			if self.isPrime(i):
 				k = int(pow(i, 2))
 				i=2
@@ -63,5 +63,5 @@ class SieveOfAtkin:
 					i+=1
 					
 
-		return [x for x in self.primes.keys() if self.primes[x] == 1]
+		return [x for x in self.primes.keys() if self.isPrime(x)]
 

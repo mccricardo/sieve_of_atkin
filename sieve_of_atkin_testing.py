@@ -1,4 +1,5 @@
 import unittest
+import random
 from sieve_of_atkin import SieveOfAtkin
 
 class SieveOfAtkinTests(unittest.TestCase):
@@ -65,19 +66,28 @@ class SieveOfAtkinTests(unittest.TestCase):
 	def testPrimesLowerThan10(self):
 		soa = SieveOfAtkin(10)
 		primesLowerThan10 = [x for x in self.primes if  x<10]			
-		self.assertEqual(soa.getPrimes(), primesLowerThan10)
+		primes = soa.getPrimes()
+		primes.sort()
+		primesLowerThan10.sort()
+		self.assertEqual(primes, primesLowerThan10)
 
 
 	def testPrimesLowerThan100(self):
 		soa = SieveOfAtkin(100)
 		primesLowerThan100 = [x for x in self.primes if  x<100]
-		self.assertEqual(soa.getPrimes(), primesLowerThan100)
+		primes = soa.getPrimes()
+		primes.sort()
+		primesLowerThan100.sort()
+		self.assertEqual(primes, primesLowerThan100)
 
 
 	def testPrimesLowerThan1000(self):
 		soa = SieveOfAtkin(1000)
 		primesLowerThan1000 = [x for x in self.primes if  x<1000]
-		self.assertEqual(soa.getPrimes(), primesLowerThan1000)
+		primes = soa.getPrimes()
+		primes.sort()
+		primesLowerThan1000.sort()
+		self.assertEqual(primes, primesLowerThan1000)
 
 
 if __name__ == '__main__':
