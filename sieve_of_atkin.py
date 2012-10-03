@@ -53,7 +53,7 @@ class SieveOfAtkin:
 					self.flip(n)				
 
 
-		for i in self.primes.keys():
+		for i in range(5, testingLimit):
 			if self.isPrime(i):
 				k = int(pow(i, 2))
 				i=2

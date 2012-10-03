@@ -64,20 +64,20 @@ class SieveOfAtkinTests(unittest.TestCase):
 
 	def testPrimesLowerThan10(self):
 		soa = SieveOfAtkin(10)
-		primesLowerThan10 = [x for x in self.primes if  x<10]
-		self.assertEqual(soa.getPrimes().sort(), primesLowerThan10.sort())
+		primesLowerThan10 = [x for x in self.primes if  x<10]			
+		self.assertEqual(soa.getPrimes(), primesLowerThan10)
 
 
 	def testPrimesLowerThan100(self):
 		soa = SieveOfAtkin(100)
 		primesLowerThan100 = [x for x in self.primes if  x<100]
-		self.assertEqual(soa.getPrimes().sort(), primesLowerThan100.sort())
+		self.assertEqual(soa.getPrimes(), primesLowerThan100)
 
 
 	def testPrimesLowerThan1000(self):
 		soa = SieveOfAtkin(1000)
 		primesLowerThan1000 = [x for x in self.primes if  x<1000]
-		self.assertEqual(soa.getPrimes().sort(), primesLowerThan1000.sort())
+		self.assertEqual(soa.getPrimes(), primesLowerThan1000)
 
 
 if __name__ == '__main__':
