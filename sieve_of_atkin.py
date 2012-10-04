@@ -2,37 +2,33 @@ from math import sqrt, ceil, pow
 
 class SieveOfAtkin:
 	def __init__(self, limit):
-		self.limit = limit
-		# Implementation assumes only big limit values will be intoduced
-		self.primes = {2:1, 3:1}
+		self.limit = limit		
+		self.primes = []
+		self.sieve = dict([(x,False) for x in range (self.limit+1)])
 
 	
 	def flip(self, prime):
 		try:
-			self.primes[prime] = 1 if self.primes[prime] == 0 else 0
+			self.sieve[prime] = True if self.sieve[prime] == False else False
 		except KeyError:
 			pass
 
 
 	def invalidate(self, prime):
 		try:
-			if self.primes[prime] == 1: self.primes[prime] = 0
+			if self.sieve[prime] == True: self.sieve[prime] = False
 		except KeyError:
 			pass			
 
 
 	def isPrime(self, prime):
 		try:
-			if self.primes[prime] == 1: return True
-			else: return False
+			return self.sieve[prime]
 		except KeyError:
 			return False
 
 
-	def getPrimes(self):	
-		otherPrimes	= dict([(x,0) for x in range (5,self.limit) if x%2!=0])
-		self.primes = dict(self.primes.items() + otherPrimes.items())
-
+	def getPrimes(self):			
 		testingLimit = int(ceil(sqrt(self.limit)))
 
 		for i in range(testingLimit):
@@ -56,12 +52,9 @@ class SieveOfAtkin:
 		for i in range(5, testingLimit):			
 			if self.isPrime(i):
 				k = int(pow(i, 2))
-				i=2
-				while k <= self.limit:
-					self.invalidate(k)
-					k*=i
-					i+=1
+				for j in range(k, self.limit, k):
+					self.invalidate(j)
 					
-
-		return [x for x in self.primes.keys() if self.isPrime(x)]
+		self.primes = [2, 3] + [x for x in self.sieve.keys() if self.isPrime(x) and x>=5]
+		return self.primes
 

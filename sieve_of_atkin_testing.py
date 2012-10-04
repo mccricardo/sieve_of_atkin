@@ -32,34 +32,56 @@ class SieveOfAtkinTests(unittest.TestCase):
 				  859, 863, 877, 881, 883, 887,
 				  907, 911, 919, 929, 937, 941,
 				  947, 953, 967, 971, 977, 983,
-				  991, 997]
+				  991, 997, 1009, 1013, 1019, 1021,
+				  1031, 1033, 1039, 1049, 1051, 1061,
+				  1063, 1069, 1087, 1091, 1093, 1097,
+				  1103, 1109, 1117, 1123, 1129, 1151,
+   				  1153, 1163, 1171, 1181, 1187, 1193,
+   				  1201, 1213, 1217, 1223, 1229, 1231,
+   				  1237, 1249, 1259, 1277, 1279, 1283,
+   				  1289, 1291, 1297, 1301, 1303, 1307,
+   				  1319, 1321, 1327, 1361, 1367, 1373,
+   				  1381, 1399, 1409, 1423, 1427, 1429,
+   				  1433, 1439, 1447, 1451, 1453, 1459,
+   				  1471, 1481, 1483, 1487, 1489, 1493,
+   				  1499, 1511, 1523, 1531, 1543, 1549,
+   				  1553, 1559, 1567, 1571, 1579, 1583,
+   				  1597, 1601, 1607, 1609, 1613, 1619,
+   				  1621, 1627, 1637, 1657, 1663, 1667,
+   				  1669, 1693, 1697, 1699, 1709, 1721,
+   				  1723, 1733, 1741, 1747, 1753, 1759,
+   				  1777, 1783, 1787, 1789, 1801, 1811,
+   				  1823, 1831, 1847, 1861, 1867, 1871,
+   				  1873, 1877, 1879, 1889, 1901, 1907,
+   				  1913, 1931, 1933, 1949, 1951, 1973,
+   				  1979, 1987, 1993, 1997, 1999]
 
 	
 	def testFlip(self):
 		soa = SieveOfAtkin(10)
 		
 		soa.flip(2)		
-		self.assertEqual(soa.primes[2], 0)		
+		self.assertTrue(soa.sieve[2])		
 		
 		soa.flip(2)		
-		self.assertEqual(soa.primes[2], 1)		
+		self.assertFalse(soa.sieve[2])		
 
 
 	def testInvalidate(self):
 		soa = SieveOfAtkin(10)
 		
 		soa.invalidate(2)
-		self.assertEqual(soa.primes[2], 0)		
+		self.assertFalse(soa.sieve[2])		
 		
-		soa.invalidate(2)
-		self.assertEqual(soa.primes[2], 0)		
+		soa.flip(2)		
+		self.assertTrue(soa.sieve[2])		
 
 
 	def testIsPrime(self):
-		soa = SieveOfAtkin(100)
-		soa.getPrimes()
+		soa = SieveOfAtkin(100)		
+		self.assertFalse(soa.isPrime(2))
+		soa.flip(2)		
 		self.assertTrue(soa.isPrime(2))
-		self.assertFalse(soa.isPrime(15))
 
 
 
@@ -88,6 +110,15 @@ class SieveOfAtkinTests(unittest.TestCase):
 		primes.sort()
 		primesLowerThan1000.sort()
 		self.assertEqual(primes, primesLowerThan1000)
+
+
+	def testPrimesLowerThan2000(self):
+		soa = SieveOfAtkin(2000)
+		primesLowerThan2000 = [x for x in self.primes if  x<2000]
+		primes = soa.getPrimes()
+		primes.sort()
+		primesLowerThan2000.sort()
+		self.assertEqual(primes, primesLowerThan2000)
 
 
 if __name__ == '__main__':
