@@ -3,8 +3,8 @@ from math import sqrt, ceil, pow
 class SieveOfAtkin:
 	def __init__(self, limit):
 		self.limit = limit		
-		self.primes = []
-		self.sieve = dict([(x,False) for x in range (self.limit+1)])
+		self.primes = []	
+		self.sieve = [False]*(self.limit+1)
 
 	
 	def flip(self, prime):
@@ -54,7 +54,9 @@ class SieveOfAtkin:
 				k = int(pow(i, 2))
 				for j in range(k, self.limit, k):
 					self.invalidate(j)
-					
-		self.primes = [2, 3] + [x for x in self.sieve.keys() if self.isPrime(x) and x>=5]
+							
+		self.primes = [2, 3] + [x for x in range(len(self.sieve)) if self.isPrime(x) and x>=5]
 		return self.primes
 
+soa = SieveOfAtkin(10000000)
+soa.getPrimes()
