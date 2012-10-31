@@ -58,5 +58,3 @@ class SieveOfAtkin:
 		self.primes = [2, 3] + [x for x in range(len(self.sieve)) if self.isPrime(x) and x>=5]
 		return self.primes
 
-soa = SieveOfAtkin(10000000)
-soa.getPrimes()
